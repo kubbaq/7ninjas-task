@@ -1,18 +1,20 @@
 import React from 'react';
+import {connect} from 'react-redux';
 import ProductCart from '../components/ProductCart';
+import { getProducts } from '../actions';
 
-class ProductLsit extends React.Component{
+class ProductList extends React.Component{
   componentDidMount(){
-
+    this.props.getProducts();
   }
 
   render(){
     return <div className="content">
-      <ProductCart />
-      <ProductCart />
-      <ProductCart />
+      <ProductCart cartId={1} />
+      <ProductCart cartId={2}/>
+      <ProductCart cartId={3}/>
     </div>;
   }
 }
 
-export default ProductLsit;
+export default connect(null, { getProducts })(ProductList);
