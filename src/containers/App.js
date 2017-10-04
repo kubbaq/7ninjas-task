@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ProductList from './ProductList';
 
 export default class App extends Component {
   render() {
@@ -15,8 +16,7 @@ export default class App extends Component {
           exceptional customer-centric experiece.
           </div>
         </div>
-        <div className="content">
-        </div>
+        <ProductList />
         <div className="gap">
         </div>
         <div className="footer">
