@@ -16,5 +16,12 @@ export const fetchProducts = () => {
 };
 
 export const fetchProduct = id => {
-  return fetch(`${API_URL}/${id}`).then(resposne => resposne.json());
+  return fetch(`${API_URL}/${id}`).then(response => {
+    
+    if (response.status >= 400) {
+      throw new Error('Bad response from server');
+    }
+    
+    return response.json();
+  });
 };
