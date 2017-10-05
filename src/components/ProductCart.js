@@ -87,7 +87,7 @@ class ProductCart extends Component {
               -
             </button>
             <span>
-              {currentCart ? currentCart.quantity : ' '}
+              {currentCart ? currentCart.quantity : ' '}$
             </span>
             <button
               disabled={
@@ -101,7 +101,7 @@ class ProductCart extends Component {
             </button>
           </div>
           <div className="product-cart-cost">
-            {currentCart ? currentCart.cost : ' '}
+            {currentCart ? currentCart.cost : ' '}$
           </div>
         </div>
       </div>

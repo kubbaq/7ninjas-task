@@ -28,7 +28,7 @@ class ProductList extends React.Component {
       <div className="content">
         {cartIds.map(cartId => <ProductCart key={cartId} cartId={cartId} />
         )}
-        <div className="content-totalprice">Total: {this.getTotalPrice()}</div>
+        <div className="content-totalprice">{this.getTotalPrice()}$</div>
       </div>
     );
   }
