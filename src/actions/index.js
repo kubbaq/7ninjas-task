@@ -1,7 +1,5 @@
 import {
-  START_FETCH_PRODUCTS,
   FETCH_PRODUCTS,
-  START_FETCH_PRODUCT,
   FETCH_PRODUCT,
   RESET_PRODUCT
 } from '../constants/ActionTypes';
@@ -27,8 +25,8 @@ export const getProduct = (cartId,productId) => dispatch => {
 };
 
 export const resetProduct = (cartId) => dispatch => {
-  return dispatch({
-    type: FETCH_PRODUCT,
+  dispatch({
+    type: RESET_PRODUCT,
     cartId
   });
 };

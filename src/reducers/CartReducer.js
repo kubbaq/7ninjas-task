@@ -17,7 +17,7 @@ export default function(state = initialState, action) {
   case RESET_PRODUCT:
     return _.pick(
       state,
-      Object.keys(state).filter(key => key !== cartId)
+      Object.keys(state).filter(key => key !== action.cartId)
     );
   default:
     return state;
