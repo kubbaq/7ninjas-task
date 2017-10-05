@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getProduct, resetProduct } from '../actions';
+import {
+  getProduct,
+  resetProduct,
+  addProductForCart,
+  removeProductFromCart
+} from '../actions';
 
 class ProductCart extends Component {
   constructor(props) {
@@ -25,20 +30,25 @@ class ProductCart extends Component {
 
   getOptions() {
     const { products, cart } = this.props;
-    const usedIds = Object.values(cart).filter(value => {
-      return value.id !== this.state.selectValue;
-    }).map(value => value.id);
-    return products.filter(product => {
-      return !usedIds.includes( product.id);
-    }).map(product => (
-      <option key={product.id} value={product.id}>
-        {product.label}
-      </option>
-    ));
+    const usedIds = Object.values(cart)
+      .filter(value => {
+        return value.id !== this.state.selectValue;
+      })
+      .map(value => value.id);
+    return products
+      .filter(product => {
+        return !usedIds.includes(product.id);
+      })
+      .map(product => (
+        <option key={product.id} value={product.id}>
+          {product.label}
+        </option>
+      ));
   }
 
   render() {
     const { cart, cartId } = this.props;
+    const currentCart = cart[cartId];
 
     return (
       <div className="product-cart">
@@ -46,8 +56,8 @@ class ProductCart extends Component {
           <img
             alt=""
             src={
-              false
-                ? '...'
+              currentCart
+                ? currentCart.image
                 : 'https://dummyimage.com/150x150/FFF/757575.png&text=IMG'
             }
           />
@@ -66,14 +76,32 @@ class ProductCart extends Component {
         <div className="product-cart-trash">[TRASH]</div>
         <div className="product-cart-usability">
           <div className="product-cart-changes">
-            <button>-</button>
+            <button
+              disabled={
+                currentCart
+                  ? currentCart.quantity === currentCart.min_quantity
+                  : true
+              }
+              onClick={() => this.props.removeProductFromCart(cartId)}
+            >
+              -
+            </button>
             <span>
-              {cart[cartId] ? cart[cartId].quantity : 'nothing to show'}
+              {currentCart ? currentCart.quantity : ' '}
             </span>
-            <button>+</button>
+            <button
+              disabled={
+                currentCart
+                  ? currentCart.quantity === currentCart.max_quantity
+                  : true
+              }
+              onClick={() => this.props.addProductForCart(cartId)}
+            >
+              +
+            </button>
           </div>
           <div className="product-cart-cost">
-            {cart[cartId] ? cart[cartId].cost : ''}
+            {currentCart ? currentCart.cost : ' '}
           </div>
         </div>
       </div>
@@ -88,6 +116,9 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, { getProduct, resetProduct })(
-  ProductCart
-);
+export default connect(mapStateToProps, {
+  getProduct,
+  resetProduct,
+  addProductForCart,
+  removeProductFromCart
+})(ProductCart);

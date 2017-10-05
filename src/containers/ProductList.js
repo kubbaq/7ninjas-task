@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import ProductCart from '../components/ProductCart';
 import { getProducts } from '../actions';
 
+const cartIds = ['cart1','cart2','cart3'];
+
 class ProductList extends React.Component {
   constructor(props) {
     super(props);
@@ -24,9 +26,8 @@ class ProductList extends React.Component {
   render() {
     return (
       <div className="content">
-        <ProductCart cartId="cart1" />
-        <ProductCart cartId="cart2" />
-        <ProductCart cartId="cart3" />
+        {cartIds.map(cartId => <ProductCart key={cartId} cartId={cartId} />
+        )}
         <div className="content-totalprice">Total: {this.getTotalPrice()}</div>
       </div>
     );
@@ -35,6 +36,7 @@ class ProductList extends React.Component {
 
 const mapStateToProps = state => {
   return {
+    products: state.products,
     cart: state.cart
   };
 };
