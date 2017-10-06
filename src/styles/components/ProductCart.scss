@@ -3,14 +3,21 @@
 .product-cart{
   margin-left:40px;
   margin-right:40px;
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: 200px 400px 174px 65px;
+  grid-template-rows: 75px 100px auto auto;
+  grid-template-areas: 
+  "image title . trash" 
+  "image description changes cost" 
+  "image select . ."
+  "hr hr hr hr";
   height: 250px;
 
   hr{
+    grid-area: hr;
     margin-left: 40px;
     color: $grayColor;
-    width:85%;
+    width:90%;
     opacity: 0.2;
     height: 1px;
   }
@@ -29,6 +36,7 @@
 }
 
 .product-cart-image{
+  grid-area: image;
   height: 200px;
   width: 200px;
 
@@ -43,24 +51,24 @@
   }
 }
 
-.product-cart-middle{
-  width:400px;
-}
-
 .product-cart-middle-title{
+  grid-area: title;
   padding-top:25px;
   height:50px;
   font-weight: 600;
 }
 
 .product-cart-middle-description{
+  grid-area: description;
   padding-right: 10px;
   color: $grayDarkerColor;
   font-size: 13px;
-  height:100px;
+  height:80px;
 }
 
 .product-cart-middle-select{
+  margin-top: 20px;
+  grid-area: select;
   font-size: 15px;
   color: $grayDarkerColor;
   width: 200px;
@@ -68,18 +76,12 @@
 }
 
 .product-cart-changes{
+  grid-area: changes;
   color: $grayDarkerColor;
-  height: 100%;
-  width:174px;
-  box-shadow: -25px 0px 1px -24px $grayColor;
-}
-
-.product-cart-changes-buttons{
   width: 100px;
   margin-left: auto;
   margin-right: auto;
-  position: relative;
-  top:40%;
+  box-shadow: -25px 0px 1px -24px $grayColor;
 }
 
 .product-cart-changes-quantity{
@@ -88,11 +90,9 @@
   width: 45px;
 }
 
-.product-cart-last{
-  width:65px;
-}
-
 .product-cart-last-trash{
+  grid-area: trash;
+  float: right;
   text-align: right;
   color: gray;
   font-size: 20px;
@@ -103,6 +103,6 @@
 }
 
 .product-cart-last-cost{
-  position: relative;
-  top:29%;
+  text-align: right;
+  grid-area: cost;
 }
