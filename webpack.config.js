@@ -1,9 +1,7 @@
-/* 
-    ./webpack.config.js
-*/
-const path = require('path');
+import path from 'path';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
+import autoprefixer from 'autoprefixer';
 
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
   template: './src/index.html',
   filename: 'index.html',
@@ -25,15 +23,19 @@ module.exports = {
         use: [
           { loader: 'style-loader' },
           { loader: 'css-loader' },
+          {loader: 'resolve-url-loader'},
           {
             loader: 'sass-loader',
-            options: { includePaths: ['absolute/path/a', 'absolute/path/b'] }
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              plugins: function () {
+                return [autoprefixer];
+              }
+            }
           }
         ]
-      },
-      {
-        test: /\.css$/,
-        use: [ 'style-loader', 'postcss-loader' ]
       }
     ]
   },

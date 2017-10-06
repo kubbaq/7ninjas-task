@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import {FaEur,FaTrashO } from 'react-icons/lib/fa';
 import {
   getProduct,
   resetProduct,
   addProductForCart,
   removeProductFromCart
 } from '../actions';
+import '../styles/components/ProductCart.scss';
 
 class ProductCart extends Component {
   constructor(props) {
@@ -16,6 +18,7 @@ class ProductCart extends Component {
     };
     this.handleChange = this.handleChange.bind(this);
     this.getOptions = this.getOptions.bind(this);
+    this.handleReset = this.handleReset.bind(this);
   }
 
   handleChange(e) {
@@ -26,6 +29,13 @@ class ProductCart extends Component {
       this.props.resetProduct(this.props.cartId);
     }
     this.setState({ selectValue: productId });
+  }
+
+  handleReset(){
+    if(this.state.selectValue !== -1){
+      this.props.resetProduct(this.props.cartId);
+      this.setState({ selectValue: -1 });
+    }
   }
 
   getOptions() {
@@ -62,48 +72,51 @@ class ProductCart extends Component {
             }
           />
         </div>
-        <div className="product-cart-title">Title Lorem ipsum dolor sit</div>
-        <div className="product-cart-description">
-          Lorem ipsum dolor sit amet, quis dictum mauris erat aliquam, ac in
-          pede pharetra quis non et.
-        </div>
-        <div className="product-cart-select">
-          <select value={this.state.selectValue} onChange={this.handleChange}>
+        <div className="product-cart-middle">
+          <div className="product-cart-middle-title">Title Lorem ipsum dolor sit</div>
+          <div className="product-cart-middle-description">
+            Lorem ipsum dolor sit amet, quis dictum mauris erat aliquam, ac in
+            pede pharetra quis non et.
+          </div>
+          <select className="product-cart-middle-select" value={this.state.selectValue} onChange={this.handleChange}>
             <option value={-1}>Choose product</option>
             {this.getOptions()}
           </select>
         </div>
-        <div className="product-cart-trash">[TRASH]</div>
         <div className="product-cart-usability">
           <div className="product-cart-changes">
-            <button
-              disabled={
-                currentCart
-                  ? currentCart.quantity === currentCart.min_quantity
-                  : true
-              }
-              onClick={() => this.props.removeProductFromCart(cartId)}
-            >
-              -
-            </button>
-            <span>
-              {currentCart ? currentCart.quantity : ' '}$
-            </span>
-            <button
-              disabled={
-                currentCart
-                  ? currentCart.quantity === currentCart.max_quantity
-                  : true
-              }
-              onClick={() => this.props.addProductForCart(cartId)}
-            >
-              +
-            </button>
-          </div>
-          <div className="product-cart-cost">
-            {currentCart ? currentCart.cost : ' '}$
+            <div className="product-cart-changes-buttons">
+              <button
+                disabled={
+                  currentCart
+                    ? currentCart.quantity === currentCart.min_quantity
+                    : true
+                }
+                onClick={() => this.props.removeProductFromCart(cartId)}
+              >
+            -
+              </button>
+              <span className="product-cart-changes-quantity">{currentCart ? currentCart.quantity : ' '}</span>
+              <button
+                disabled={
+                  currentCart
+                    ? currentCart.quantity === currentCart.max_quantity
+                    : true
+                }
+                onClick={() => this.props.addProductForCart(cartId)}
+              >
+            +
+              </button>
+            </div>
           </div>
         </div>
+        <div className="product-cart-last">
+          <div onClick={this.handleReset} className="product-cart-last-trash"><FaTrashO/></div>
+          <div className="product-cart-last-cost">
+            {currentCart ? currentCart.cost : ' '}{(currentCart && currentCart) ? <FaEur/> : ''}
+          </div>
+        </div>
+        <hr/>
       </div>
     );
   }
