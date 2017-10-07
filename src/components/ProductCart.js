@@ -115,10 +115,10 @@ class ProductCart extends Component {
           </button>
         </div>
         <div onClick={this.handleReset} className="product-cart-last-trash">
-          <FaTrashO />
+          <FaTrashO className="product-cart-last-trash-icon" />
         </div>
         <div className="product-cart-last-cost">
-          {currentCart ? currentCart.cost : ' '}
+          <span className="product-cart-last-cost-pric">{currentCart ? currentCart.cost : ' '}</span>
           {currentCart && currentCart ? <FaEur /> : ''}
         </div>
         <hr />
