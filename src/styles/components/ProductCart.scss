@@ -1,23 +1,24 @@
 @import '../consts.scss';
 
 .product-cart{
-  margin-left:40px;
-  margin-right:40px;
+  margin-left:10px;
+  margin-right:10px;
   display: grid;
-  grid-template-columns: 200px 400px 174px 65px;
-  grid-template-rows: 75px 100px auto auto;
+  grid-template-columns: 380px 112px;
+  grid-template-rows: 200px 75px 70px auto auto;
   grid-template-areas: 
-  "image title . trash" 
-  "image description changes cost" 
-  "image select . ."
-  "hr hr hr hr";
-  height: 250px;
+  "image image"
+  " title trash" 
+  "description changes" 
+  "select cost"
+  "hr hr";
+  height: 420px;
 
   hr{
     grid-area: hr;
-    margin-left: 40px;
+    margin-left: 10px;
     color: $grayColor;
-    width:90%;
+    width:95%;
     opacity: 0.2;
     height: 1px;
   }
@@ -37,8 +38,8 @@
 
 .product-cart-image{
   grid-area: image;
-  height: 200px;
-  width: 200px;
+  margin-left: auto;
+  margin-right: auto;
 
   img{
     margin:25px 25px 25px 25px;
@@ -60,14 +61,14 @@
 
 .product-cart-middle-description{
   grid-area: description;
+  height:70px;
   padding-right: 10px;
   color: $grayDarkerColor;
   font-size: 13px;
-  height:80px;
 }
 
 .product-cart-middle-select{
-  margin-top: 20px;
+  margin-top: 0px;
   grid-area: select;
   font-size: 15px;
   color: $grayDarkerColor;
@@ -90,6 +91,7 @@
 }
 
 .product-cart-last-trash{
+  padding-right: 0px;
   padding-top: 25px;
   height: 50px;
   grid-area: trash;
@@ -104,14 +106,88 @@
 }
 
 .product-cart-last-cost{
+  padding-right: 0px;
   text-align: right;
   grid-area: cost;
 }
 
-@media (max-width: 768px) {
+@media (min-width: 768px) {
+  .product-cart{
+    margin-left: 10px;
+    margin-right: 10px;
+    display: grid;
+    grid-template-columns: 200px 400px 148px;
+    grid-template-rows: 75px 100px auto auto;
+    grid-template-areas: 
+    "image title trash" 
+    "image description changes" 
+    "image select cost"
+    "hr hr hr";
+    height: 250px;
   
+    hr{
+      margin-left: 10px;
+      width:85%;
+    }
+  }
+
+  .product-cart-image{
+    img{
+      margin:25px 25px 25px 25px;
+    }
+  }
+
+  .product-cart-middle-select{
+    margin-top: 20px;
+  }
+
+  .product-cart-last-trash{
+    padding-right: 30px;
+  }
+
+  .product-cart-last-cost{
+    padding-right: 30px;
+  }
 }
 
-@media (max-width: 512px) {
+@media (min-width: 1024px) {
+  .product-cart{
+    margin-left:40px;
+    margin-right:40px;
+    display: grid;
+    grid-template-columns: 200px 400px 174px 65px;
+    grid-template-rows: 75px 100px auto auto;
+    grid-template-areas: 
+    "image title . trash" 
+    "image description changes cost" 
+    "image select . ."
+    "hr hr hr hr";
+    height: 250px;
 
+    hr{
+      margin-left: 40px;
+      color: $grayColor;
+      width:90%;
+      opacity: 0.2;
+      height: 1px;
+    }
+  }
+
+  .product-cart-image{
+    img{
+      margin:25px 25px 25px 25px;
+    }
+  }
+
+  .product-cart-middle-select{
+    margin-top: 20px;
+  }
+
+  .product-cart-last-trash{
+    padding-right: 0;
+  }
+
+  .product-cart-last-cost{
+    padding-right: 0;
+  }
 }

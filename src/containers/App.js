@@ -14,8 +14,8 @@ export default class App extends Component {
             </div>
             <div>
               Our mission is to build market-leading, software-driven businesses
-              by delivering outstanding value, contunuous innovation, and an
-              exceptional customer-centric experiece.
+              by delivering outstanding value, continuous innovation and an
+              exceptional customer-centric experience.
             </div>
           </div>
           <ProductList />
